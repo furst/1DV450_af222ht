@@ -1,0 +1,18 @@
+<h1>Taggar</h1>
+
+<table>
+	<thead>
+		<th>Namn</th>
+		<th class="created">Skapad</th>
+	</thead>
+	<tbody>
+		<tr ng-repeat="item in tags.tags | filter: criteria">
+			<td>{{ item.tag.data.name }}</td>
+			<td class="created">{{ item.tag.data.created_at | date: 'yyyy-MM-dd' }}</td>
+			<td><a href="#/tags/{{ item.tag.data.id }}/resources">Visa resurser</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<a href="" ng-click="page(tags.pagination.previous)">< Föregående</a>
+<a href="" ng-click="page(tags.pagination.next)">Nästa ></a>

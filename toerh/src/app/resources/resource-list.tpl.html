@@ -1,0 +1,32 @@
+<h1>Resurser</h1>
+
+<p><a href="#/resources/new">Ny resurs</a></p>
+
+<input type="search" placeholder="Sök" ng-model="criteria">
+
+<table>
+	<thead>
+		<th>Namn</th>
+		<th class="description">Beskrivning</th>
+		<th>Url</th>
+		<th class="created">Skapad</th>
+	</thead>
+	<tbody>
+		<tr ng-repeat="item in resources.resources | filter: criteria">
+			<td>{{ item.resource.data.name }}</td>
+			<td class="description">{{ item.resource.data.description | trim:10 }}</td>
+			<td>{{ item.resource.data.url }}</td>
+			<td class="created">{{ item.resource.data.created_at | date: 'yyyy-MM-dd' }}</td>
+			<td><a href="#/resources/{{ item.resource.data.id }}">Visa</a></td>
+			<td><a href="#/resources/{{ item.resource.data.id }}/update">Uppdatera</a></td>
+			<td><a href="" ng-click="remove(item.resource.data.id)">Radera</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<a href="" ng-click="page(resources.pagination.previous)">< Föregående</a>
+<a href="" ng-click="page(resources.pagination.next)">Nästa ></a>
+
+
+
+

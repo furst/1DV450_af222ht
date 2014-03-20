@@ -1,0 +1,337 @@
+<% content_for :main do %>
+
+                <h1>Resources</h1>
+
+                <p>Here you find information about handling resources.</p>
+
+                <ul>
+                    <li><a href="#getall"># Get resource collection</a></li>
+                    <li><a href="#get"># Get one resource</a></li>
+                    <li><a href="#post"># Create a new resource</a></li>
+                    <li><a href="#put"># Update a resource</a></li>
+                    <li><a href="#delete"># Delete a resource</a></li>
+                </ul>
+
+                <hr>
+
+                <h2 id="getall">Get resource collection</h2>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/resources</p>
+
+                <h3>Return formats</h3>
+                <p>
+                    <strong>json:</strong> default format<br>
+                    <strong>xml:</strong> append .xml to uri
+                </p>
+
+                <p class="example">www.example.com/api/resources.xml</p>
+
+                <h3>Query Parameters</h3>
+
+                <table>
+                    <tr>
+                        <td>search</td>
+                        <td>searchterm, wildcards are included</td>
+                    </tr>
+                    <tr>
+                        <td>limit</td>
+                        <td>Return this amount of records(default is 20)</td>
+                    </tr>
+                    <tr>
+                        <td>page</td>
+                        <td>Get records from specified pagenumber, pagesize is defined by limit or default 20</td>
+                    </tr>
+                </table>
+
+                <p>Return 10 records</p>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/resources?limit=10</p>
+
+                <p>Return 10 records on page 3, record 21-30</p>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/resources?limit=10&page=3</p>
+
+                <h3>Example response</h3>
+
+                <h4>Pagination</h4>
+
+                <p>The response contains links to pagination. The following links are provided:<br>
+                first, previous, self, next, last
+                </p>
+
+                <div class="response">
+                    <code>
+                        Status: 200 OK<br>
+                        X-RateLimit-Limit: 5000<br>
+                        X-RateLimit-Remaining: 4999
+                    </code>
+                </div>
+
+                <div class="example">
+                    
+<pre>
+{
+    pagination: {
+        first: {
+            href: "/api/resources?page=1"
+        },
+        previous: null,
+        self: {
+            href: "/api/resources?page=1"
+        },
+        next: null,
+        last: {
+            href: "/api/resources?page=1"
+        },
+    },
+    resources: [
+        {
+            resource: {
+                self: "/api/resources/1",
+                data: {
+                    id: 1,
+                    name: "rails",
+                    description: "En resurs",
+                    url: "www.google.se",
+                    created_at: "2014-03-06T13:13:05.997Z",
+                    updated_at: "2014-03-06T13:13:05.997Z",
+                },
+                user: {
+                    id: 2,
+                    name: null,
+                    email: "test@test.se",
+                    link: "/api/users/2/resources",
+                },
+                tags: [ ],
+            }
+        }
+    ]
+}
+</pre>
+                </div>
+
+                <hr>
+
+                <h2 id="get">Get one resource</h2>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/resources/:id</p>
+                
+                <p><strong>:id</strong> is a resource id</p>
+
+                <h3>Return formats</h3>
+                <p>
+                    <strong>json:</strong> default format<br>
+                    <strong>xml:</strong> append .xml to uri
+                </p>
+
+                <h3>Example</h3>
+
+                <p>Return the resource with id 2</p>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/resources/2</p>
+                
+                <p>Return the resource with id 2, in xml format</p>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/resources/2.xml</p>
+
+                <h3>Example response</h3>
+
+                <div class="response">
+                    <code>
+                        Status: 200 OK<br>
+                        X-RateLimit-Limit: 5000<br>
+                        X-RateLimit-Remaining: 4999
+                    </code>
+                </div>
+
+                <div class="example">
+                    
+<pre>
+{
+    resource: {
+        self: "/api/resources/1",
+        data: {
+            id: 1,
+            name: "rails",
+            description: "En resurs",
+            url: "www.google.se",
+            created_at: "2014-03-06T13:13:05.997Z",
+            updated_at: "2014-03-06T13:13:05.997Z",
+        },
+        user: {
+            id: 2,
+            name: null,
+            email: "test@test.se",
+            link: "/api/users/2/resources",
+        },
+        tags: [ ]
+    }
+}
+</pre>
+                </div>
+
+                <hr>
+
+                <h2 id="post">Create new resource</h2>
+
+                <p class="example"><span class="post">POST</span>www.example.com/api/resources</p>
+
+                <h3>Post parameters</h3>
+
+                <table>
+                    <tr>
+                        <td>name</td>
+                        <td>required, name of the resource</td>
+                    </tr>
+                    <tr>
+                        <td>description</td>
+                        <td>required, description of the resource</td>
+                    </tr>
+                    <tr>
+                        <td>url</td>
+                        <td>required, url of the resource</td>
+                    </tr>
+                    <tr>
+                        <td>resource_type_id</td>
+                        <td>id of resourcetype</td>
+                    </tr>
+                    <tr>
+                        <td>license_id</td>
+                        <td>id of license</td>
+                    </tr>
+                    <tr>
+                        <td>tags</td>
+                        <td>comma separated integers of tag ids</td>
+                    </tr>
+                </table>
+
+                <h3>Example</h3>
+
+                <p class="example"><span class="post">POST</span>www.example.com/api/resources</p>
+
+                <p class="example">
+                    name: a cool resource<br>
+                    description: This resource is the best<br>
+                    url: www.example.com<br>
+                    resource_type_id: 1<br>
+                    license_id: 1<br>
+                    tags: 1,3
+                </p>
+
+                <h3>Example response</h3>
+
+                <div class="response">
+                    <code>
+                        Status: 201 Created<br>
+                        X-RateLimit-Limit: 5000<br>
+                        X-RateLimit-Remaining: 4999
+                    </code>
+                </div>
+
+                <p>Same as when retrieving a single resource</p>
+
+                <hr>
+
+                <h2 id="put">Update resource</h2>
+
+                <p class="example"><span class="put">PUT</span>www.example.com/api/resources/:id</p>
+
+                <p><strong>:id</strong> is a resource id</p>
+                
+                <h3>Put parameters</h3>
+
+                <table>
+                    <tr>
+                        <td>name</td>
+                        <td>required, name of the resource</td>
+                    </tr>
+                    <tr>
+                        <td>description</td>
+                        <td>required, description of the resource</td>
+                    </tr>
+                    <tr>
+                        <td>url</td>
+                        <td>required, url of the resource</td>
+                    </tr>
+                    <tr>
+                        <td>resource_type_id</td>
+                        <td>id of resourcetype</td>
+                    </tr>
+                    <tr>
+                        <td>license_id</td>
+                        <td>id of license</td>
+                    </tr>
+                    <tr>
+                        <td>tags</td>
+                        <td>comma separated integers of tag ids</td>
+                    </tr>
+                </table>
+
+                <h3>Example</h3>
+
+                <p class="example"><span class="put">PUT</span>www.example.com/api/resources/2</p>
+
+                <p class="example">
+                    name: a changed cool resource<br>
+                    description: Changed the description<br>
+                </p>
+
+                <h3>Example response</h3>
+
+                <div class="response">
+                    <code>
+                        Status: 204 No content<br>
+                        X-RateLimit-Limit: 5000<br>
+                        X-RateLimit-Remaining: 4999
+                    </code>
+                </div>
+
+                <div class="example">
+                    
+<pre>
+no content
+</pre>
+                </div>
+                
+                <hr>
+
+                <h2 id="delete">Delete resource</h2>
+
+                <p class="example"><span class="delete">DELETE</span>www.example.com/api/resources/:id</p>
+
+                <p><strong>:id</strong> is a resource id</p>
+
+                <h3>Example</h3>
+        
+                <p class="example"><span class="delete">DELETE</span>www.example.com/api/resources/2</p>
+
+                <h3>Example response</h3>
+
+                <div class="response">
+                    <code>
+                        Status: 204 No content<br>
+                        X-RateLimit-Limit: 5000<br>
+                        X-RateLimit-Remaining: 4999
+                    </code>
+                </div>
+
+                <div class="example">
+                    
+<pre>
+no content
+</pre>
+                </div>
+
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+

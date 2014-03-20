@@ -1,0 +1,7 @@
+<input type="text" ng-model="resource.name">
+
+<select ng-model="resource.tag_id" ng-options="tag.tag.data.id as tag.tag.data.name for tag in tags.tags"></select>
+
+<button ng-click="processForm()">Spara</button>
+
+<pre ng-bind="resource | json"></pre>

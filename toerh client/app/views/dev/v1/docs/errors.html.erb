@@ -1,0 +1,73 @@
+<% content_for :main do %>
+
+                <h1>Errors</h1>
+
+                <p>Here you will find information about errors and error-messages.</p>
+
+                <ul>
+                    <li><a href="#errorcodes"># Errorcodes</a></li>
+                </ul>
+
+                <hr>
+
+                <h2 id="errorcodes">Errorcodes</h2>
+
+                <h3>401: Unauthorized</h3>
+
+                <p>Access denied, invalid API-key, see setup and security</p>
+
+                <h3>403: Forbidden</h3>
+
+                <p>
+                    <ul>
+                        <li>Resource belongs to another user</li>
+                        <li>Account blocked</li>
+                        <li>Ratelimit exceeded</li>
+                    </ul>
+                </p>
+
+                <h3>404: Not found</h3>
+
+                <p>The resource/page does not exist</p>
+
+                <h3>422: Unprocessable entity</h3>
+
+                <p>Validation error</p>
+
+                <h3>500: Internal Error</h3>
+
+                <p>Server error</p>
+
+                <h3>Example response</h3>
+
+                <div class="response">
+                    <code>
+                        Status: 404 Not found<br>
+                        X-RateLimit-Limit: 5000<br>
+                        X-RateLimit-Remaining: 4999
+                    </code>
+                </div>
+
+                <div class="example">
+                    
+<pre>
+{
+    response_type: 404
+    response_code: 404
+    messages: "The resource could not be found"
+    help: http://www.addef.se
+}
+</pre>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+

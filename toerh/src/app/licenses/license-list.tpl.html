@@ -1,0 +1,20 @@
+<h1>Licenser</h1>
+
+<input type="search" placeholder="Sök" ng-model="criteria">
+
+<table>
+	<thead>
+		<th>Namn</th>
+		<th class="created">Skapad</th>
+	</thead>
+	<tbody>
+		<tr ng-repeat="item in licenses.licenses | filter: criteria">
+			<td>{{ item.license.data.name }}</td>
+			<td class="created">{{ item.license.data.created_at | date: 'yyyy-MM-dd' }}</td>
+			<td><a href="#/licenses/{{ item.license.data.id }}/resources">Visa resurser</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<a href="" ng-click="page(licenses.pagination.previous)">< Föregående</a>
+<a href="" ng-click="page(licenses.pagination.next)">Nästa ></a>

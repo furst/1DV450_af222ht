@@ -1,0 +1,20 @@
+<h1>Användare</h1>
+
+<table>
+	<thead>
+		<th>Namn</th>
+		<th>Epost</th>
+		<th class="created">Skapad</th>
+	</thead>
+	<tbody>
+		<tr ng-repeat="item in users.users | filter: criteria">
+			<td>{{ item.user.data.name }}</td>
+			<td>{{ item.user.data.email }}</td>
+			<td class="created">{{ item.user.data.created_at | date: 'yyyy-MM-dd' }}</td>
+			<td><a href="#/users/{{ item.user.data.uid }}/resources">Visa resurser</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<a href="" ng-click="page(users.pagination.previous)">< Föregående</a>
+<a href="" ng-click="page(users.pagination.next)">Nästa ></a>

@@ -1,0 +1,252 @@
+<% content_for :main do %>
+                
+                <h1>Resource types</h1>
+
+                <p>Here you will find information on handling resource types.</p>
+
+                <ul>
+                    <li><a href="#getall"># Get resource type collection</a></li>
+                    <li><a href="#get"># Get one resource type</a></li>
+                    <li><a href="#getresources"># Get resource types resources</a></li>
+                </ul>
+
+                <hr>
+
+                <h2 id="getall">Get resource type collection</h2>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/types</p>
+
+                <h3>Return formats</h3>
+                <p>
+                    <strong>json:</strong> default format<br>
+                    <strong>xml:</strong> append .xml to uri
+                </p>
+
+                <p class="example">www.example.com/api/types.xml</p>
+
+                <h3>Query Parameters</h3>
+
+                <table>
+                    <tr>
+                        <td>limit</td>
+                        <td>Return this amount of records(default is 20)</td>
+                    </tr>
+                    <tr>
+                        <td>page</td>
+                        <td>Get records from specified pagenumber, pagesize is defined by limit or default 20</td>
+                    </tr>
+                </table>
+
+                <p>Return 10 records</p>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/types?limit=10</p>
+
+                <p>Return 10 records on page 3, record 21-30</p>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/types?limit=10&page=3</p>
+
+                <h3>Example response</h3>
+
+                <h4>Pagination</h4>
+
+                <p>The response contains links to pagination. The following links are provided:<br>
+                first, previous, self, next, last
+                </p>
+
+                <div class="response">
+                    <code>
+                        Status: 200 OK<br>
+                        X-RateLimit-Limit: 5000<br>
+                        X-RateLimit-Remaining: 4999
+                    </code>
+                </div>
+
+                <div class="example">
+                    
+<pre>
+{
+    pagination: {
+        first: {
+            href: "/api/types?page=1"
+        },
+        previous: null,
+        self: {
+            href: "/api/types?page=1"
+        },
+        next: null,
+        last: {
+            href: "/api/types?page=1"
+        },
+    },
+    types: [
+        {
+            type: {
+                self: "/api/types/1",
+                data: {
+                    id: "1",
+                    name: "en resurstyp",
+                    created_at: "2014-03-15T12:12:59.007Z",
+                    updated_at: "2014-03-15T12:12:59.014Z"
+                }
+            }
+        }
+    ]
+}
+</pre>
+                </div>
+
+                <hr>
+
+                <h2 id="get">Get one resource type</h2>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/types/:id</p>
+                
+                <p><strong>:id</strong> is a type id</p>
+
+                <h3>Return formats</h3>
+                <p>
+                    <strong>json:</strong> default format<br>
+                    <strong>xml:</strong> append .xml to uri
+                </p>
+
+                <h3>Example</h3>
+
+                <p>Return the type with id 2</p>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/types/2</p>
+                
+                <p>Return the type with id 2, in xml format</p>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/types/2.xml</p>
+
+                <h3>Example response</h3>
+
+                <div class="response">
+                    <code>
+                        Status: 200 OK<br>
+                        X-RateLimit-Limit: 5000<br>
+                        X-RateLimit-Remaining: 4999
+                    </code>
+                </div>
+
+                <div class="example">
+                    
+<pre>
+{
+    type: {
+        self: "/api/types/1"
+        data: {
+            id: "1"
+            name: "en resurstyp"
+            created_at: "2014-03-15T12:12:59.007Z"
+            updated_at: "2014-03-15T12:12:59.014Z"
+        }
+    }
+}
+</pre>
+                </div>
+
+                <hr>
+
+                <h2 id="getresources">Get resource types resources</h2>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/types/:id/resources</p>
+
+                <p><strong>:id</strong> is a type id</p>
+
+                <h3>Return formats</h3>
+                <p>
+                    <strong>json:</strong> default format<br>
+                    <strong>xml:</strong> append .xml to uri
+                </p>
+
+                <p class="example">www.example.com/api/types/1/resources.xml</p>
+
+                <h3>Query Parameters</h3>
+
+                <table>
+                    <tr>
+                        <td>limit</td>
+                        <td>Return this amount of records(default is 20)</td>
+                    </tr>
+                    <tr>
+                        <td>page</td>
+                        <td>Get records from specified pagenumber, pagesize is defined by limit or default 20</td>
+                    </tr>
+                </table>
+
+                <h3>Example response</h3>
+
+                <h4>Pagination</h4>
+
+                <p>The response contains links to pagination. The following links are provided:<br>
+                first, previous, self, next, last
+                </p>
+
+                <div class="response">
+                    <code>
+                        Status: 200 OK<br>
+                        X-RateLimit-Limit: 5000<br>
+                        X-RateLimit-Remaining: 4999
+                    </code>
+                </div>
+
+                <div class="example">
+                    
+<pre>
+{
+    pagination: {
+        first: {
+            href: "/api/types/1/resources?page=1"
+        },
+        previous: null,
+        self: {
+            href: "/api/types/1/resources?page=1"
+        },
+        next: null,
+        last: {
+            href: "/api/types/1/resources?page=1"
+        },
+    },
+    resources: [
+        {
+            resource: {
+                self: "/api/resources/1",
+                data: {
+                    id: 1,
+                    name: "rails",
+                    description: "En resurs",
+                    url: "www.google.se",
+                    created_at: "2014-03-06T13:13:05.997Z",
+                    updated_at: "2014-03-06T13:13:05.997Z",
+                },
+                user: {
+                    id: 2,
+                    name: null,
+                    email: "test@test.se",
+                    link: "/api/users/2/resources",
+                },
+                tags: [
+                    {
+                        tag: {
+                            name: "testtagg"
+                            link: "/api/tags/1/resources"
+                        }
+                    }
+                ]
+                license: {
+                    name: "creative commons"
+                    link: "/api/licenses/1/resources"
+                }
+                resource_type: {
+                    name: "video"
+                    link: "/api/types/1/resources"
+                }
+            }
+        }
+    ]
+}
+</pre>
+                </div>
+
+<% end %>

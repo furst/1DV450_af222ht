@@ -1,0 +1,40 @@
+<% content_for :main do %>
+
+<div class="dashboard">
+
+<h1>Edit user</h1>
+
+<%= form_for @apiuser, :url => dev_update_user_path(), method: :patch do |f| %>
+
+	<% if @apiuser.errors.any? %>
+        <div class="error-messages">
+            <h3>Form is invalid</h3>
+            <ul>
+                <% for message in @apiuser.errors.full_messages %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+  
+  	<p>
+    	<%= f.label :email %><br>
+    	<%= f.email_field :email %>
+  	</p>
+
+  	<p>
+    <%= f.label :blocked %><br>
+  		<%= f.check_box :blocked %>
+  	</p>
+ 
+  	<p>
+    	<%= f.submit %>
+  	</p>
+
+<% end %>
+
+<%= link_to 'Back to list', dev_userslist_path %>
+
+</div>
+
+<% end %>

@@ -1,0 +1,238 @@
+<% content_for :main do %>
+                
+                <h1>Users</h1>
+
+                <p>Here you will find information on handling users.</p>
+
+                <ul>
+                    <li><a href="#getall"># Get user collection</a></li>
+                    <li><a href="#get"># Get one user</a></li>
+                    <li><a href="#getresources"># Get users resources</a></li>
+                </ul>
+
+                <hr>
+
+                <h2 id="getall">Get user collection</h2>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/users</p>
+
+                <h3>Return formats</h3>
+                <p>
+                    <strong>json:</strong> default format<br>
+                    <strong>xml:</strong> append .xml to uri
+                </p>
+
+                <p class="example">www.example.com/api/users.xml</p>
+
+                <h3>Query Parameters</h3>
+
+                <table>
+                    <tr>
+                        <td>limit</td>
+                        <td>Return this amount of records(default is 20)</td>
+                    </tr>
+                    <tr>
+                        <td>page</td>
+                        <td>Get records from specified pagenumber, pagesize is defined by limit or default 20</td>
+                    </tr>
+                </table>
+
+                <p>Return 10 records</p>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/users?limit=10</p>
+
+                <p>Return 10 records on page 3, record 21-30</p>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/users?limit=10&page=3</p>
+
+                <h3>Example response</h3>
+
+                <h4>Pagination</h4>
+
+                <p>The response contains links to pagination. The following links are provided:<br>
+                first, previous, self, next, last
+                </p>
+
+                <div class="response">
+                    <code>
+                        Status: 200 OK<br>
+                        X-RateLimit-Limit: 5000<br>
+                        X-RateLimit-Remaining: 4999
+                    </code>
+                </div>
+
+                <div class="example">
+                    
+<pre>
+{
+    pagination: {
+        first: {
+            href: "/api/tags?page=1"
+        },
+        previous: null,
+        self: {
+            href: "/api/tags?page=1"
+        },
+        next: null,
+        last: {
+            href: "/api/tags?page=1"
+        },
+    },
+    users: [
+        {
+            user: {
+                self: "/api/users/1",
+                data: {
+                    uid: "2",
+                    name: "admin@admin.se",
+                    created_at: "2014-03-15T12:12:59.007Z",
+                    updated_at: "2014-03-15T12:12:59.014Z"
+                }
+            }
+        }
+    ]
+}
+</pre>
+                </div>
+
+                <hr>
+
+                <h2 id="get">Get one user</h2>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/users/:id</p>
+                
+                <p><strong>:id</strong> is a user id</p>
+
+                <h3>Return formats</h3>
+                <p>
+                    <strong>json:</strong> default format<br>
+                    <strong>xml:</strong> append .xml to uri
+                </p>
+
+                <h3>Example</h3>
+
+                <p>Return the user with id 2</p>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/users/2</p>
+                
+                <p>Return the user with id 2, in xml format</p>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/users/2.xml</p>
+
+                <h3>Example response</h3>
+
+                <div class="response">
+                    <code>
+                        Status: 200 OK<br>
+                        X-RateLimit-Limit: 5000<br>
+                        X-RateLimit-Remaining: 4999
+                    </code>
+                </div>
+
+                <div class="example">
+                    
+<pre>
+{
+    user: {
+        self: "/api/users/1"
+        data: {
+            uid: "2"
+            name: null
+            email: "admin@admin.se"
+            created_at: "2014-03-15T12:12:59.007Z"
+            updated_at: "2014-03-15T12:12:59.014Z"
+        }
+    }
+}
+</pre>
+                </div>
+
+                <hr>
+
+                <h2 id="getresources">Get users resources</h2>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/users/:id/resources</p>
+
+                <p><strong>:id</strong> is a user id</p>
+
+                <h3>Return formats</h3>
+                <p>
+                    <strong>json:</strong> default format<br>
+                    <strong>xml:</strong> append .xml to uri
+                </p>
+
+                <p class="example">www.example.com/api/users/1/resources.xml</p>
+
+                <h3>Query Parameters</h3>
+
+                <table>
+                    <tr>
+                        <td>limit</td>
+                        <td>Return this amount of records(default is 20)</td>
+                    </tr>
+                    <tr>
+                        <td>page</td>
+                        <td>Get records from specified pagenumber, pagesize is defined by limit or default 20</td>
+                    </tr>
+                </table>
+
+                <h3>Example response</h3>
+
+                <h4>Pagination</h4>
+
+                <p>The response contains links to pagination. The following links are provided:<br>
+                first, previous, self, next, last
+                </p>
+
+                <div class="response">
+                    <code>
+                        Status: 200 OK<br>
+                        X-RateLimit-Limit: 5000<br>
+                        X-RateLimit-Remaining: 4999
+                    </code>
+                </div>
+
+                <div class="example">
+                    
+<pre>
+{
+    pagination: {
+        first: {
+            href: "/api/users/1/resources?page=1"
+        },
+        previous: null,
+        self: {
+            href: "/api/users/1/resources?page=1"
+        },
+        next: null,
+        last: {
+            href: "/api/users/1/resources?page=1"
+        },
+    },
+    resources: [
+        {
+            resource: {
+                self: "/api/resources/1",
+                data: {
+                    id: 1,
+                    name: "rails",
+                    description: "En resurs",
+                    url: "www.google.se",
+                    created_at: "2014-03-06T13:13:05.997Z",
+                    updated_at: "2014-03-06T13:13:05.997Z",
+                },
+                user: {
+                    id: 2,
+                    name: null,
+                    email: "test@test.se",
+                    link: "/api/users/2/resources",
+                },
+                tags: [ ],
+            }
+        }
+    ]
+}
+</pre>
+                </div>
+
+<% end %>

@@ -1,0 +1,37 @@
+<% content_for :main do %>
+  
+  <div class="login">
+
+  <h1>Register</h1>
+
+  <%= form_for(@apiuser, :url => dev_apiusers_path()) do |f| %>
+  	<% if @apiuser.errors.any? %>
+  		<div class="error-messages">
+  			<h3>Form is invalid</h3>
+  			<ul>
+  				<% for message in @apiuser.errors.full_messages %>
+  					<li><%= message %></li>
+  				<% end %>
+  			</ul>
+  		</div>
+  	<% end %>
+
+    	<p>
+      	<%= f.email_field :email, :placeholder => "Email" %>
+    	</p>
+   
+    	<p>
+      	<%= f.password_field :password, :placeholder => "Password" %>
+    	</p>
+
+    	<p>
+      	<%= f.password_field :password_confirmation, :placeholder => "Password confirmation" %>
+    	</p>
+   
+    	<p>
+      	<%= f.submit %>
+    	</p>
+  <% end %>
+
+  </div>
+<% end %>

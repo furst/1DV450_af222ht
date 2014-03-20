@@ -1,0 +1,36 @@
+<% content_for :main do %>
+
+<div class="span16">
+  <header class="page-header">
+    <h1>Application: <%= @application.name %></h1>
+  </header>
+</div>
+
+<div class="clearfix">
+
+<div class="span12">
+  <h3>Callback urls:</h3>
+  <p id="callback_url">
+    <% @application.redirect_uri.split.each do |uri| %><span class="highlight"><%= uri %></span> <% end %>
+  </p>
+
+  <h3>Application Id:</h3>
+  <p><span class="highlight" id="application_id"><%= @application.uid %></span></p>
+
+  <h3>Secret:</h3>
+  <p><span class="highlight" id="secret"><%= @application.secret %></span></p>
+
+  <h3>Link to authorization code:</h3>
+  <p><%= link_to 'Authorize', oauth_authorization_path(:client_id => @application.uid, :redirect_uri => @application.redirect_uri, :response_type => 'code' ) %></p>
+</div>
+
+<div class="span4">
+  <h2>Actions</h2>
+  <p><%= link_to 'List all', oauth_applications_path %></p>
+  <p><%= link_to 'Edit', edit_oauth_application_path(@application) %></p>
+  <p><%= render 'delete_form', application: @application %></p>
+</div>
+
+</div>
+
+<% end %>

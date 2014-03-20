@@ -1,0 +1,29 @@
+<h1>{{ item.resource.data.name }}</h1>
+
+<h2>Information</h2>
+
+<p>
+<strong>Url: </strong>{{ item.resource.data.url }}<br>
+<strong>Beskrivning: </strong>{{ item.resource.data.description }}<br>
+<strong>Skapad: </strong>{{ item.resource.data.created_at | date: 'yyyy-MM-dd' }}
+
+</p>
+
+<h2>Taggar</h2>
+
+<ul>
+	<li ng-repeat="tag in item.resource.tags"><a href="#/tags/{{ tag.tag.id }}/resources">{{ tag.tag.name }}</a></li>
+</ul>
+
+<h2>Licens</h2>
+
+<p><a href="#/licenses/{{ item.resource.license.id }}/resources">{{ item.resource.license.name }}</a></p>
+
+<h2>Användare</h2>
+
+<p><a href="#/users/{{ item.resource.user.uid }}/resources">{{ item.resource.user.email }}, {{ item.resource.user.name }}</a>
+</p>
+
+<h2>Resurstyp</h2>
+
+<p><a href="#/resource-types/{{ item.resource.resource_type.id }}/resources">{{ item.resource.resource_type.name }}</a></p>

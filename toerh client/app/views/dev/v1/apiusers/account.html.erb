@@ -1,0 +1,21 @@
+<% content_for :main do %>
+
+<div class="dashboard">
+
+	<h1>Dashboard</h1>
+
+	<h3>Account information</h3>
+
+	<p>
+		Email: <%= @email %><br>
+		Name: <%= @name %><br>
+		Daily count: <%= @count %>
+	</p>
+
+	<h3>Access token</h3>
+
+	<span class="highlight"><%= @token %></span>
+
+</div>
+
+<% end %>

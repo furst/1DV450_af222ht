@@ -1,0 +1,51 @@
+<% content_for :main do %>
+<h1>Getting started</h1>
+
+                <p><strong>Gongratulations,</strong> you found the way to the documentation for the TOERH api! Follow this getting started guide and you will be good to go.</p>
+
+                <ul>
+                    <li><a href="#version"># Versioning</a></li>
+                    <li><a href="#security"># Security</a></li>
+                    <li><a href="#first"># Your first request</a></li>
+                </ul>
+
+                <hr>
+
+                <h2 id="version">Versioning</h2>
+                <p>The standard route for request is <span class="highlight">www.example.com/api</span>, that url always gets the latest version. If you wan't to go back a version just append the versionnumber like so: <span class="highlight">www.example.com/api/v1</span></p>
+
+                <hr>
+
+                <h2 id="security">Security</h2>
+
+                <h3>Authenticate with api-key</h3>
+
+                <p>All requests require an api-key. Put the <a href="#">access token</a> in the "Authorization" header of every request. The admin can block your key if nessesary.</p>
+
+                <p class="example">Authorization: Token c35b6fe7b617f5706d60af1078493a60</p>
+
+                <h3>User Authentication</h3>
+
+                <p>In order to create, update and delete resources you also need to authenticate with user credentials. Create a user with the <a href="users.html">user-api.</a></p>
+
+                <p>Send the user credentials in the header like this:</p>
+
+                <p class="example">toerh-email: test@test.se<br>
+                toerh-password: abc123</p>
+
+                <hr>
+
+                <h2 id="first">Your first request</h2>
+
+                <p>Now you are ready to make your first request! Try out the test below.</p>
+
+                <p>Do a <span class="highlight">get</span> request to this url:</p>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/resources</p>
+
+                <p>And include your access token you got from <a href="#">here.</a></p>
+
+                <p class="example">Authorization: Token c35b6fe7b617f5706d60af1078493a60</p>
+
+                <p>All went okey? Great, now let's move on to the real stuff. Start with checking out the <a href="resources.html">resources.</a></p>
+<% end %>

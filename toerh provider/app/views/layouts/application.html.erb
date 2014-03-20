@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Toerh developers</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <%= stylesheet_link_tag "normalize", "style" %>
+
+        <%= javascript_include_tag "application" %>
+
+    </head>
+    <body>
+
+        <div class="header-band">
+            <div class="header">
+                <div class="logo">Toerh developers</div>
+
+                <div class="nav">
+                	<ul>
+                		<li><%= link_to 'Applications', oauth_applications_path() %></li>
+                		<li><%= link_to 'Authorized applications', oauth_authorized_applications_path() %></li>
+                	</ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="oauth-container">
+
+            <div class="main-oauth">
+
+                <%= yield :main %>
+
+            </div>
+            
+        </div>
+
+    </body>
+</html>

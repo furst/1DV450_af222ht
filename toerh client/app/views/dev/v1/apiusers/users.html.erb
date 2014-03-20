@@ -1,0 +1,30 @@
+<% content_for :main do %>
+
+  <div class="dashboard">
+    <h1>Api users</h1>
+
+    <table class="clean">
+      <tr>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Access token</th>
+        <th>Count</th>
+        <th>Is blocked</th>
+      </tr>
+     
+      <% @apiusers.each do |apiuser| %>
+        <tr>
+          <td><%= apiuser.email %></td>
+          <td><%= apiuser.name %></td>
+          <td><%= apiuser.access_token %></td>
+          <td><%= apiuser.count %></td>
+          <td><%= apiuser.blocked %></td>
+          <td><%= link_to 'Edit', dev_edit_user_path(apiuser) %></td>
+          <td><%= link_to 'Destroy', dev_delete_user_path(apiuser), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </table>
+
+    </div>
+
+<% end %>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Toerh documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <%= stylesheet_link_tag "normalize", "style" %>
+
+        <%= javascript_include_tag "application" %>
+
+    </head>
+    <body>
+
+        <div class="header-band">
+            <div class="header">
+                <div class="logo">Toerh developers</div>
+
+                <div class="nav">
+                    <ul>
+                        <li><%= link_to 'Documentation', dev_docs_path() %></li>
+                        <% if current_admin.present? %>
+                            <li><%= link_to 'Users', dev_userslist_path() %></li>
+                        <% end %>
+                        <% if current_user.present? %>
+                            <li><%= link_to 'Dashboard', dev_account_path() %></li>
+                            <li><%= link_to 'Logout', dev_logout_path() %></li>
+                        <% else %>
+                            <li><%= link_to 'Login', dev_login_path() %></li>
+                            <li><%= link_to 'Register', dev_register_path() %></li>
+                        <% end %>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="main-container">
+
+            <%= yield :main %>
+            
+        </div>
+
+    </body>
+</html>

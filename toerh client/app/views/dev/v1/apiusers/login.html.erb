@@ -1,0 +1,30 @@
+<% content_for :main do %>
+
+  <div class="login">
+    <h1>Login</h1>
+
+    <% if flash[:notice] %>
+    	<div class="notice">
+    		<%= flash[:notice] %>
+    	</div>
+    <% end %>
+
+    <%= form_tag dev_post_login_path do %>
+
+    	<p>
+        	<%= email_field_tag :email, params[:email], :placeholder => "Email" %>
+      	</p>
+     
+      	<p>
+        	<%= password_field_tag :password, '', :placeholder => "Password" %>
+      	</p>
+
+      	<p>
+        	<%= submit_tag 'Login' %>
+      	</p>
+
+    <% end %>
+
+    </div>
+
+<% end %>

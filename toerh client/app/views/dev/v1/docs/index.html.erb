@@ -1,0 +1,58 @@
+<% content_for :main do %>
+<h1>Getting started</h1>
+
+                <p><strong>Gongratulations,</strong> you found the way to the documentation for the TOERH api! Follow this getting started guide and you will be good to go.</p>
+
+                <ul>
+                    <li><a href="#version"># Versioning</a></li>
+                    <li><a href="#security"># Security</a></li>
+                    <li><a href="#first"># Your first request</a></li>
+                </ul>
+
+                <hr>
+
+                <h2 id="version">Versioning</h2>
+                <p>The standard route for request is <span class="highlight">www.example.com/api</span>, that url always gets the latest version. If you wan't to go back a version just append the versionnumber like so: <span class="highlight">www.example.com/api/v1</span></p>
+
+                <hr>
+
+                <h2 id="security">Security</h2>
+
+                <h3>Authenticate with api-key</h3>
+
+                <p>All requests require an api-key. Put the <%= link_to 'access token', dev_login_path() %> in the "Authorization" header of every request. The admin can block your key if nessesary.</p>
+
+                <p class="example">Authorization: Token c35b6fe7b617f5706d60af1078493a60</p>
+
+                <h3>User Authentication</h3>
+
+                <p>In order to create, update and delete resources you also need to authenticate with user credentials through a service provider.</p>
+
+                <p>Provide a button on your website with this url:</p>
+
+                <p class="example">http://www.myservice.com/authenticate?callback="A FILE WHERE YOU WILL PROCESS THE RECIEVED AUTH TOKEN(example: localhost:8888/auth.html)"</p>
+
+                <p>When a user go to that link they will be asked to log in and authorize the account, after that they will be redirected back to the callback provided. At the callback specified you will recieve a queryparameter containing an auth token that you can make calls with.</p>
+                
+                <p>The auth token is valid for one hour.</p>
+
+                <p>Send the auth token in the header like this:</p>
+
+                <p class="example">X-auth-token: 79e19a1205b00e953fd3d9e44d3e78f5</p>
+
+                <hr>
+
+                <h2 id="first">Your first request</h2>
+
+                <p>Now you are ready to make your first request! Try out the test below.</p>
+
+                <p>Do a <span class="highlight">get</span> request to this url:</p>
+
+                <p class="example"><span class="get">GET</span>www.example.com/api/resources</p>
+
+                <p>And include your access token you got from <%= link_to 'here', dev_login_path() %></p>
+
+                <p class="example">Authorization: Token c35b6fe7b617f5706d60af1078493a60</p>
+
+                <p>All went okey? Great, now let's move on to the real stuff. Start with checking out the <a href="resources">resources.</a></p>
+<% end %>

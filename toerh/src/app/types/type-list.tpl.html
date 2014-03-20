@@ -1,0 +1,18 @@
+<h1>Resurstyper</h1>
+
+<table>
+	<thead>
+		<th>Namn</th>
+		<th class="created">Skapad</th>
+	</thead>
+	<tbody>
+		<tr ng-repeat="item in types.resource_types | filter: criteria">
+			<td>{{ item.resource_type.data.name }}</td>
+			<td class="created">{{ item.resource_type.data.created_at | date: 'yyyy-MM-dd' }}</td>
+			<td><a href="#/resource-types/{{ item.resource_type.data.id }}/resources">Visa resurser</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<a href="" ng-click="page(types.pagination.previous)">< Föregående</a>
+<a href="" ng-click="page(types.pagination.next)">Nästa ></a>
