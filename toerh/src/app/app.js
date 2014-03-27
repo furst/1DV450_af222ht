@@ -8,7 +8,8 @@ angular.module('app', [
   	'types',
   	'crud',
   	'trimFilter',
-  	'buttonDirective'
+  	'buttonDirective',
+    'login'
 ])
 
 .constant('REST_PATH', {
@@ -27,6 +28,7 @@ angular.module('app', [
   	$httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
   	$httpProvider.defaults.headers.common.Authorization = 'Token ' + 'a50b507c261f7df8615fb0d3ae11833b';
+    
 
 }])
 

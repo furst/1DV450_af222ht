@@ -1,4 +1,12 @@
-<input type="text" ng-model="resource.name">
+<input type="text" ng-model="resource.name" placeholder="Namn">
+
+<input type="text" ng-model="resource.description" placeholder="Beskrivning">
+
+<input type="text" ng-model="resource.url" placeholder="Url">
+
+<input type="text" ng-model="resource.license_id" placeholder="Licens">
+
+<input type="text" ng-model="resource.resource_type_id" placeholder="resurstyp">
 
 <select ng-model="resource.tag_id" ng-options="tag.tag.data.id as tag.tag.data.name for tag in tags.tags"></select>
 

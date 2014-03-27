@@ -38,11 +38,13 @@ angular.module('resources', ['crud'])
 	};
 
 	$scope.remove = function(r_id) {
-		Resource.path(REST_PATH.resources).delete(
-		    {r_id: r_id},
-		    function (data) {
-		        console.log('deleted');
 
+		var resourceToRemove = $scope.resources.resources[r_id];
+
+		Resource.path(REST_PATH.resources).delete(
+		    {r_id: resourceToRemove.resource.data.id},
+		    function (data) {
+		        $scope.resources.resources.splice(r_id, 1);
 		    },
 		    function (data) {
 		        //error handling goes here
@@ -71,7 +73,7 @@ angular.module('resources', ['crud'])
 	});
 }])
 
-.controller('ResourceCreateController', ['$scope', 'Resource', 'Cud', 'REST_PATH', function($scope, Resource, Cud, REST_PATH) {
+.controller('ResourceCreateController', ['$scope', 'Resource', 'REST_PATH', '$location', function($scope, Resource, REST_PATH, $location) {
 
 	Resource.path(REST_PATH.tags).get(
 	    {},
@@ -86,16 +88,19 @@ angular.module('resources', ['crud'])
 	$scope.resource = {};
 
 	$scope.processForm = function() {
-
-		Cud.save($scope.resource).then(function(response) {
-			console.log('saved');
-		}).then({
-			// Error
-		});
+		Resource.path(REST_PATH.resources).save(
+			$scope.resource,
+			function(data) {
+				$location.path('/resources');
+			},
+			function(data) {
+				// error handling
+			}
+		);
 	}
 }])
 
-.controller('ResourceUpdateController', ['$scope', 'Resource', 'Cud', '$routeParams', 'REST_PATH', function($scope, Resource, Cud, $routeParams, REST_PATH) {
+.controller('ResourceUpdateController', ['$scope', 'Resource', '$routeParams', 'REST_PATH', function($scope, Resource, $routeParams, REST_PATH) {
 
 	Resource.path(REST_PATH.resources).get(
 	    {r_id: $routeParams.r_id},
@@ -108,11 +113,15 @@ angular.module('resources', ['crud'])
 
 	$scope.processForm = function() {
 
-		Cud.save($scope.resource).then(function(response) {
-			console.log('saved');
-		}).then({
-			// Error
-		});
+		Resource.path(REST_PATH.resources).update(
+			$scope.resource,
+			function(data) {
+				console.log('updated');
+			},
+			function(data) {
+				// error handling
+			}
+		);
 	}
 }]);
 

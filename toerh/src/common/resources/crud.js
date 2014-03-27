@@ -1,31 +1,36 @@
 angular.module('crud', ['ngResource'])
 
-.factory('Resource', ['$resource', 'PAGE_LIMIT', function($resource, PAGE_LIMIT) {
+.factory('Resource', ['$resource', 'PAGE_LIMIT', '$cookies', function($resource, PAGE_LIMIT, $cookie) {
 
 	var factory = {};
 
 	factory.path = function(restPath, page) {
+		var authToken = $cookie.authToken;
+
 		var pagePath = '';
 		if (page != null) {
 			pagePath = '?limit=' + PAGE_LIMIT + '&page=' + page;
-		};
-		return $resource('http://localhost\\:3001/api/' + restPath + '/:r_id' + pagePath, {r_id: '@id'});
+		} else {
+			pagePath = '?limit=' + PAGE_LIMIT;
+		}
+		return $resource('http://localhost\\:3001/api/' + restPath + '/:r_id' + pagePath, {r_id: '@id'}, {
+			save: {
+				method: 'POST',
+				headers: {'X-auth-token': authToken}
+			},
+			delete: {
+				method: 'DELETE',
+				isArray: false,
+				headers: {'X-auth-token': authToken}
+			},
+			update: {
+				method: 'PUT',
+				headers: {'X-auth-token': authToken}
+			}
+			
+		});
 	}
 	
-	return factory;
-}])
-
-.factory('Cud', ['$http', function($http) {
-	var factory = {};
-
-	factory.save = function(data) {
-		return $http.post('http://localhost:3001/api/resources', data);
-	}
-
-	factory.update = function(data) {
-		return $http.put();
-	}
-
 	return factory;
 }])
 
