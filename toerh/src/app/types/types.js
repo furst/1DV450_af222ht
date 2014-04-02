@@ -12,7 +12,7 @@ angular.module('types', ['crud'])
 	
 }])
 
-.controller('TypeListController', ['$scope', 'Resource', 'REST_PATH', function($scope, Resource, REST_PATH) {
+.controller('TypeListController', ['$scope', 'Errors', 'Resource', 'REST_PATH', function($scope, Errors, Resource, REST_PATH) {
 
 	$scope.page = function(page) {
 		if (page != null) {
@@ -23,7 +23,7 @@ angular.module('types', ['crud'])
 			        $scope.types = data;
 			    },
 			    function (data) {
-			        //error handling goes here
+			        Errors.message('Resurstyperna kunde inte hämtas', true);
 			});
 		};
 	};
@@ -34,19 +34,19 @@ angular.module('types', ['crud'])
 	        $scope.types = data;
 	    },
 	    function (data) {
-	        //error handling goes here
+	        Errors.message('Resurstyperna kunde inte hämtas', true);
 	});
 }])
 
-.controller('TypeController', ['$scope', 'ResourceChildren', '$routeParams', 'REST_PATH', function($scope, ResourceChildren, $routeParams, REST_PATH) {
+.controller('TypeController', ['$scope', 'Errors', 'ResourceChildren', '$routeParams', 'REST_PATH', function($scope, Errors, ResourceChildren, $routeParams, REST_PATH) {
 	
 	$scope.page = function(page) {
 		if (page != null) {
 			page = page.href.substring(page.href.indexOf('page') + 5);
 			ResourceChildren.get($routeParams.t_id, REST_PATH.types, page).then(function(response) {
 				$scope.resources = response.data;
-			}).then({
-				// Error
+			}).then(function() {
+				Errors.message('Resurserna kunde inte hämtas', true);
 			});
 		};
 		
@@ -54,8 +54,8 @@ angular.module('types', ['crud'])
 
 	ResourceChildren.get($routeParams.t_id, REST_PATH.types).then(function(response) {
 		$scope.resources = response.data;
-	}).then({
-		// Error
+	}).then(function() {
+		Errors.message('Resurserna kunde inte hämtas', true);
 	});
 	
 }]);

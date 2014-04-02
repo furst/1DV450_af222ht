@@ -1,10 +1,13 @@
 module Api
 	module V1
 		class ResourcesController < BaseController
-			#before_filter :restrict_access_login, :only => [:create, :update, :destroy]
+			before_filter :restrict_access_login, :only => [:create, :update, :destroy]
 			before_filter :restrict_access_token
 
 			respond_to :xml, :json
+
+			def cors
+			end
 
 			def index
 				if params[:limit]
@@ -40,16 +43,14 @@ module Api
 
         		respond_with @resource, status: 201
 
-        		# rescue
-        		# 	error(500, 500, 'Ett oväntat fel inträffade')
+        		rescue
+        			error(500, 500, 'Ett oväntat fel inträffade')
 		    end
 
 		    def update
-		    	user = current_user
-		    	user_resource = Resource.find_by_id(user.id)
-		    	new_resource = Resource.find_by_id(params[:id])
+		    	resource = Resource.find_by_id(params[:id])
 		    	
-		    	if user_resource.user_id != new_resource.user_id
+		    	if resource.user_id != current_user.id
 		    		error(403, 403, 'The resource belongs to another user') and return
 		    	end
 
@@ -63,9 +64,9 @@ module Api
 					end
 				end
 
-		        if new_resource.update(resource_params)
+		        if resource.update(resource_params)
         		else
-        			validation_error(new_resource.errors.messages) and return
+        			validation_error(resource.errors.messages) and return
         		end
 
 		        respond_with @resource, status: 204
@@ -76,11 +77,9 @@ module Api
 
 		    def destroy
 
-		    	user = current_user
-		    	user_resource = Resource.find_by_id(user.id)
-		    	new_resource = Resource.find_by_id(params[:id])
+		    	resource = Resource.find_by_id(params[:id])
 		    	
-		    	if user_resource.user_id != new_resource.user_id
+		    	if resource.user_id != current_user.id
 		    		error(403, 403, 'The resource belongs to another user') and return
 		    	end
 

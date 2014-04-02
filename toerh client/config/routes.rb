@@ -2,9 +2,9 @@ require 'api_constraints'
 
 TOERH::Application.routes.draw do
 
-  get '', to: 'sessions#home'
+  match '/*path' => 'sessions#home', :via => :options
 
-  match '(*foo)' => "sessions#home", via: :options
+  get '', to: 'sessions#home'
   
   match '/auth/:provider/callback', to: 'sessions#create', via: :all
   get '/authenticate' => 'sessions#authenticate'

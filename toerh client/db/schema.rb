@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20140314153035) do
     t.string   "password_digest"
     t.string   "name"
     t.string   "access_token"
-    t.datetime "today",           default: '2014-03-15 11:47:08'
+    t.datetime "today",           default: '2014-04-02 04:33:35'
     t.boolean  "is_admin",        default: false
     t.boolean  "blocked",         default: false
     t.integer  "count",           default: 0

@@ -90,6 +90,14 @@ table tbody tr {
 	border-top:1px #ccc solid;
 }
 
+.error {
+	color:red;
+}
+
+.success {
+	color:green;
+}
+
 /* #Page Styles
 ================================================== */
 

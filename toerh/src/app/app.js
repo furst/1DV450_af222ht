@@ -9,7 +9,8 @@ angular.module('app', [
   	'crud',
   	'trimFilter',
   	'buttonDirective',
-    'login'
+    'login',
+    'errors'
 ])
 
 .constant('REST_PATH', {
@@ -20,16 +21,14 @@ angular.module('app', [
 	types: 'types'
 })
 
-.constant('PAGE_LIMIT', 5)
+.constant('PAGE_LIMIT', 20)
 
 .config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
   	$routeProvider.when('/', {templateUrl: 'app/start.tpl.html', controller: 'AppController'});
 
   	$httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
-  	$httpProvider.defaults.headers.common.Authorization = 'Token ' + 'a50b507c261f7df8615fb0d3ae11833b';
-    
-
+  	$httpProvider.defaults.headers.common.Authorization = 'Token ' + '82c3ef38bbccc6348e36acc508cd41dd';
 }])
 
 .controller('AppController', ['$scope', '$cookies', '$routeParams', function($scope, $cookies, $routeParams) {

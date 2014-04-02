@@ -66,6 +66,9 @@
     <div class="container">
   
         <div class="sixteen columns">
+
+            <p><div class="{{ errorsClass }}">{{ errors }}</div></p>
+
             <div ng-view></div>
         </div>
         
@@ -86,6 +89,8 @@
     <script src="common/resources/crud.js"></script>
     <script src="common/directives/button.js"></script>
     <script src="common/filters/trim.js"></script>
+
+    <script src="common/services/ErrorHandler.js"></script>
 
     <script src="app/resources/resources.js"></script>
     <script src="app/tags/tags.js"></script>

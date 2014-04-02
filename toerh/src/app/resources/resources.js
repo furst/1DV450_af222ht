@@ -20,7 +20,7 @@ angular.module('resources', ['crud'])
 	
 }])
 
-.controller('ResourceListController', ['$scope', 'Resource', '$routeParams', 'REST_PATH', function($scope, Resource, $routeParams, REST_PATH) {
+.controller('ResourceListController', ['$scope', 'Errors', 'Resource', '$routeParams', 'REST_PATH', function($scope, Errors, Resource, $routeParams, REST_PATH) {
 
 	$scope.page = function(page) {
 		if (page != null) {
@@ -32,7 +32,7 @@ angular.module('resources', ['crud'])
 
 			    },
 			    function (data) {
-			        //error handling goes here
+			        Errors.message('Data kunde inte hämtas', true);
 			});
 		};
 	};
@@ -47,7 +47,7 @@ angular.module('resources', ['crud'])
 		        $scope.resources.resources.splice(r_id, 1);
 		    },
 		    function (data) {
-		        //error handling goes here
+		        Errors.message('Resursen kunde inte tas bort', true);
 		});
 	}
 
@@ -58,31 +58,30 @@ angular.module('resources', ['crud'])
 
 	    },
 	    function (data) {
-	        //error handling goes here
+	        Errors.message('Resurserna kunde inte hämtas', true);
 	});
 }])
 
-.controller('ResourceController', ['$scope', 'Resource', '$routeParams', 'REST_PATH', function($scope, Resource, $routeParams, REST_PATH) {
+.controller('ResourceController', ['$scope', 'Errors', 'Resource', '$routeParams', 'REST_PATH', function($scope, Errors, Resource, $routeParams, REST_PATH) {
 	Resource.path(REST_PATH.resources).get(
 	    {r_id: $routeParams.r_id},
 	    function (data) {
 	        $scope.item = data;
 	    },
 	    function (data) {
-	        //error handling goes here
+	        Errors.message('Resursen kunde inte hämtas', true);
 	});
 }])
 
-.controller('ResourceCreateController', ['$scope', 'Resource', 'REST_PATH', '$location', function($scope, Resource, REST_PATH, $location) {
+.controller('ResourceCreateController', ['$scope', 'Errors', 'Resource', 'REST_PATH', '$location', function($scope, Errors, Resource, REST_PATH, $location) {
 
 	Resource.path(REST_PATH.tags).get(
 	    {},
 	    function (data) {
 	        $scope.tags = data;
-
 	    },
 	    function (data) {
-	        //error handling goes here
+	        Errors.message('Taggarna kunde inte hämtas', true);
 	});
 
 	$scope.resource = {};
@@ -92,15 +91,16 @@ angular.module('resources', ['crud'])
 			$scope.resource,
 			function(data) {
 				$location.path('/resources');
+				Errors.message('Resursen skapades', false);
 			},
 			function(data) {
-				// error handling
+				Errors.message(data.data.messages, true);
 			}
 		);
 	}
 }])
 
-.controller('ResourceUpdateController', ['$scope', 'Resource', '$routeParams', 'REST_PATH', function($scope, Resource, $routeParams, REST_PATH) {
+.controller('ResourceUpdateController', ['$scope', 'Errors', 'Resource', '$routeParams', 'REST_PATH', function($scope, Errors, Resource, $routeParams, REST_PATH) {
 
 	Resource.path(REST_PATH.resources).get(
 	    {r_id: $routeParams.r_id},
@@ -108,18 +108,18 @@ angular.module('resources', ['crud'])
 	        $scope.resource = data;
 	    },
 	    function (data) {
-	        //error handling goes here
+	        Errors.message('Resursen kunde inte hämtas', true);
 	});
 
 	$scope.processForm = function() {
-
 		Resource.path(REST_PATH.resources).update(
-			$scope.resource,
+			{r_id: $scope.resource.resource.data.id},
+			$scope.resource.resource.data,
 			function(data) {
-				console.log('updated');
+				Errors.message('Resursen uppdaterad', false);
 			},
 			function(data) {
-				// error handling
+				Errors.message('Resursen kunde inte uppdateras', true);
 			}
 		);
 	}

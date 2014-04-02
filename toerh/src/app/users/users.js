@@ -12,7 +12,7 @@ angular.module('users', ['crud'])
 	
 }])
 
-.controller('UserListController', ['$scope', 'Resource', 'REST_PATH', function($scope, Resource, REST_PATH) {
+.controller('UserListController', ['$scope', 'Errors', 'Resource', 'REST_PATH', function($scope, Errors, Resource, REST_PATH) {
 
 	$scope.page = function(page) {
 		if (page != null) {
@@ -23,7 +23,7 @@ angular.module('users', ['crud'])
 			        $scope.users = data;
 			    },
 			    function (data) {
-			        //error handling goes here
+			        Errors.message('Användarna kunde inte hämtas', true);
 			});
 		};
 	};
@@ -34,19 +34,19 @@ angular.module('users', ['crud'])
 	        $scope.users = data;
 	    },
 	    function (data) {
-	        //error handling goes here
+	        Errors.message('Användarna kunde inte hämtas', true);
 	});
 }])
 
-.controller('UserController', ['$scope', 'ResourceChildren', '$routeParams', 'REST_PATH', function($scope, ResourceChildren, $routeParams, REST_PATH) {
+.controller('UserController', ['$scope', 'Errors', 'ResourceChildren', '$routeParams', 'REST_PATH', function($scope, Errors, ResourceChildren, $routeParams, REST_PATH) {
 	
 	$scope.page = function(page) {
 		if (page != null) {
 			page = page.href.substring(page.href.indexOf('page') + 5);
 			ResourceChildren.get($routeParams.u_id, REST_PATH.users, page).then(function(response) {
 				$scope.resources = response.data;
-			}).then({
-				// Error
+			}).then(function() {
+				Errors.message('Resurserna kunde inte hämtas', true);
 			});
 		};
 		
@@ -54,8 +54,8 @@ angular.module('users', ['crud'])
 
 	ResourceChildren.get($routeParams.u_id, REST_PATH.users).then(function(response) {
 		$scope.resources = response.data;
-	}).then({
-		// Error
+	}).then(function() {
+		Errors.message('Resurserna kunde inte hämtas', true);
 	});
 	
 }]);

@@ -10,8 +10,6 @@ angular.module('crud', ['ngResource'])
 		var pagePath = '';
 		if (page != null) {
 			pagePath = '?limit=' + PAGE_LIMIT + '&page=' + page;
-		} else {
-			pagePath = '?limit=' + PAGE_LIMIT;
 		}
 		return $resource('http://localhost\\:3001/api/' + restPath + '/:r_id' + pagePath, {r_id: '@id'}, {
 			save: {

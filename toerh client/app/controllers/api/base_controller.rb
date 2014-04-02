@@ -3,7 +3,7 @@ module Api
 
         protect_from_forgery with: :null_session
 
-		rescue_from Exception, with: :error_message
+		#rescue_from Exception, with: :error_message
 
         before_action :default_format_json
 
