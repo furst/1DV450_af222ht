@@ -20,7 +20,7 @@ angular.module('resources', ['crud'])
 	
 }])
 
-.controller('ResourceListController', ['$scope', 'Errors', 'Resource', '$routeParams', 'REST_PATH', function($scope, Errors, Resource, $routeParams, REST_PATH) {
+.controller('ResourceListController', ['$scope', 'Errors', 'Resource', '$routeParams', 'REST_PATH', '$cookies', function($scope, Errors, Resource, $routeParams, REST_PATH, $cookie) {
 
 	$scope.page = function(page) {
 		if (page != null) {
@@ -55,7 +55,11 @@ angular.module('resources', ['crud'])
 	    {},
 	    function (data) {
 	        $scope.resources = data;
-
+	        if ($cookie.authToken == ' ') {
+	        	$scope.loggedIn = false;
+	        } else {
+	        	$scope.loggedIn = true;
+	        }
 	    },
 	    function (data) {
 	        Errors.message('Resurserna kunde inte hämtas', true);
@@ -84,6 +88,24 @@ angular.module('resources', ['crud'])
 	        Errors.message('Taggarna kunde inte hämtas', true);
 	});
 
+	Resource.path(REST_PATH.licenses).get(
+	    {},
+	    function (data) {
+	        $scope.licenses = data;
+	    },
+	    function (data) {
+	        Errors.message('Licenserna kunde inte hämtas', true);
+	});
+
+	Resource.path(REST_PATH.types).get(
+	    {},
+	    function (data) {
+	        $scope.types = data;
+	    },
+	    function (data) {
+	        Errors.message('Resurstyperna kunde inte hämtas', true);
+	});
+
 	$scope.resource = {};
 
 	$scope.processForm = function() {
@@ -109,6 +131,33 @@ angular.module('resources', ['crud'])
 	    },
 	    function (data) {
 	        Errors.message('Resursen kunde inte hämtas', true);
+	});
+
+	Resource.path(REST_PATH.tags).get(
+	    {},
+	    function (data) {
+	        $scope.tags = data;
+	    },
+	    function (data) {
+	        Errors.message('Taggarna kunde inte hämtas', true);
+	});
+
+	Resource.path(REST_PATH.licenses).get(
+	    {},
+	    function (data) {
+	        $scope.licenses = data;
+	    },
+	    function (data) {
+	        Errors.message('Licenserna kunde inte hämtas', true);
+	});
+
+	Resource.path(REST_PATH.types).get(
+	    {},
+	    function (data) {
+	        $scope.types = data;
+	    },
+	    function (data) {
+	        Errors.message('Resurstyperna kunde inte hämtas', true);
 	});
 
 	$scope.processForm = function() {

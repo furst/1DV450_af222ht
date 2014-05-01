@@ -33,7 +33,7 @@ module Api
         		end
 
         		if(params.has_key?(:tags))
-        			tags = params[:tags].split(",").map(&:to_i)
+        			tags = params[:tags].to_s.split(",").map(&:to_i)
 
         			for tag in tags
 					  	@tagging = Tagging.create(:resource_id => @resource.id, :tag_id => tag)
@@ -55,11 +55,11 @@ module Api
 		    	end
 
 		    	if(params.has_key?(:tags))
-			    	Tagging.destroy_all(:resource_id => new_resource.id)
-			     	tags = params[:tags].split(",").map(&:to_i)
+			    	Tagging.destroy_all(:resource_id => resource.id)
+			     	tags = params[:tags].to_s.split(",").map(&:to_i)
 
 					for tag in tags
-					  	@tagging = Tagging.create(:resource_id => new_resource.id, :tag_id => tag)
+					  	@tagging = Tagging.create(:resource_id => resource.id, :tag_id => tag)
 						@tagging.save
 					end
 				end

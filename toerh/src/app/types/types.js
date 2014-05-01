@@ -45,17 +45,12 @@ angular.module('types', ['crud'])
 			page = page.href.substring(page.href.indexOf('page') + 5);
 			ResourceChildren.get($routeParams.t_id, REST_PATH.types, page).then(function(response) {
 				$scope.resources = response.data;
-			}).then(function() {
-				Errors.message('Resurserna kunde inte hämtas', true);
 			});
 		};
-		
 	};
 
 	ResourceChildren.get($routeParams.t_id, REST_PATH.types).then(function(response) {
 		$scope.resources = response.data;
-	}).then(function() {
-		Errors.message('Resurserna kunde inte hämtas', true);
 	});
 	
 }]);

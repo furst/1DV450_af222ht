@@ -25,4 +25,4 @@ Tagging.create(:tag_id => '1', :resource_id => '4')
 Tagging.create(:tag_id => '3', :resource_id => '5')
 Tagging.create(:tag_id => '4', :resource_id => '6')
 Tagging.create(:tag_id => '3', :resource_id => '1')
-User.create(:email => 'hej@test.se', :name => 'testnamn');
+User.create(:email => 'hej@test.se', :name => 'testnamn', :uid => '2');

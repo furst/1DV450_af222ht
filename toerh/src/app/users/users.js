@@ -45,8 +45,6 @@ angular.module('users', ['crud'])
 			page = page.href.substring(page.href.indexOf('page') + 5);
 			ResourceChildren.get($routeParams.u_id, REST_PATH.users, page).then(function(response) {
 				$scope.resources = response.data;
-			}).then(function() {
-				Errors.message('Resurserna kunde inte hämtas', true);
 			});
 		};
 		
@@ -54,8 +52,6 @@ angular.module('users', ['crud'])
 
 	ResourceChildren.get($routeParams.u_id, REST_PATH.users).then(function(response) {
 		$scope.resources = response.data;
-	}).then(function() {
-		Errors.message('Resurserna kunde inte hämtas', true);
 	});
 	
 }]);

@@ -45,8 +45,6 @@ angular.module('tags', ['crud'])
 			page = page.href.substring(page.href.indexOf('page') + 5);
 			ResourceChildren.get($routeParams.t_id, REST_PATH.tags, page).then(function(response) {
 				$scope.resources = response.data;
-			}).then(function() {
-				Errors.message('Resurserna kunde inte hämtas', true);
 			});
 		};
 		
@@ -54,8 +52,6 @@ angular.module('tags', ['crud'])
 
 	ResourceChildren.get($routeParams.t_id, REST_PATH.tags).then(function(response) {
 		$scope.resources = response.data;
-	}).then(function() {
-		Errors.message('Resurserna kunde inte hämtas', true);
 	});
 	
 }]);

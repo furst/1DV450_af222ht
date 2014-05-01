@@ -45,8 +45,6 @@ angular.module('licenses', ['crud'])
 			page = page.href.substring(page.href.indexOf('page') + 5);
 			ResourceChildren.get($routeParams.t_id, REST_PATH.licenses, page).then(function(response) {
 				$scope.resources = response.data;
-			}).then(function() {
-				Errors.message('Resurserna kunde inte hämtas', true);
 			});
 		};
 		
@@ -54,8 +52,6 @@ angular.module('licenses', ['crud'])
 
 	ResourceChildren.get($routeParams.t_id, REST_PATH.licenses).then(function(response) {
 		$scope.resources = response.data;
-	}).then(function() {
-		Errors.message('Resurserna kunde inte hämtas', true);
 	});
 	
 }]);

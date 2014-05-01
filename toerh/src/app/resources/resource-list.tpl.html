@@ -1,6 +1,9 @@
 <h1>Resurser</h1>
 
-<p><a href="#/resources/new">Ny resurs</a></p>
+<div ng-if="loggedIn">
+    <p><a href="#/resources/new">Ny resurs</a></p>
+</div>
+
 
 <input type="search" placeholder="Sök" ng-model="criteria">
 
@@ -18,8 +21,8 @@
 			<td>{{ item.resource.data.url }}</td>
 			<td class="created">{{ item.resource.data.created_at | date: 'yyyy-MM-dd' }}</td>
 			<td><a href="#/resources/{{ item.resource.data.id }}">Visa</a></td>
-			<td><a href="#/resources/{{ item.resource.data.id }}/update">Uppdatera</a></td>
-			<td><a href="" ng-click="remove($index)">Radera</a></td>
+			<td ng-if="loggedIn"><a href="#/resources/{{ item.resource.data.id }}/update">Uppdatera</a></td>
+			<td ng-if="loggedIn"><a href="" ng-click="remove($index)">Radera</a></td>
 		</tr>
 	</tbody>
 </table>

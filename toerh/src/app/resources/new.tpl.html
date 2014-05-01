@@ -4,12 +4,10 @@
 
 <input type="text" ng-model="resource.url" placeholder="Url">
 
-<input type="text" ng-model="resource.license_id" placeholder="Licens">
+<select ng-model="resource.license_id" ng-options="license.license.data.id as license.license.data.name for license in licenses.licenses"></select>
 
-<input type="text" ng-model="resource.resource_type_id" placeholder="resurstyp">
+<select ng-model="resource.resource_type_id" ng-options="type.resource_type.data.id as type.resource_type.data.name for type in types.resource_types"></select>
 
-<select ng-model="resource.tag_id" ng-options="tag.tag.data.id as tag.tag.data.name for tag in tags.tags"></select>
+<select ng-model="resource.tags" ng-options="tag.tag.data.id as tag.tag.data.name for tag in tags.tags"></select>
 
 <button ng-click="processForm()">Spara</button>
-
-<pre ng-bind="resource | json"></pre>
